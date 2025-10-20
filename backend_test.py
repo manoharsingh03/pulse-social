@@ -94,14 +94,14 @@ class PulseAPITester:
           email: email,
           name: 'Test User',
           picture: 'https://via.placeholder.com/150',
-          created_at: new Date()
+          created_at: new Date().toISOString()
         }});
         
         db.user_sessions.insertOne({{
           user_id: userId,
           session_token: sessionToken,
-          expires_at: new Date(Date.now() + 7*24*60*60*1000),
-          created_at: new Date()
+          expires_at: new Date(Date.now() + 7*24*60*60*1000).toISOString(),
+          created_at: new Date().toISOString()
         }});
         
         print('User created: ' + userId);
