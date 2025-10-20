@@ -120,6 +120,11 @@ async def get_current_user(request: Request) -> User:
     
     return User(**user_doc)
 
+# ===== HEALTH CHECK =====
+@api_router.get("/")
+async def root():
+    return {"message": "Pulse API is running", "status": "healthy"}
+
 # ===== AUTH ENDPOINTS =====
 @api_router.post("/auth/session")
 async def exchange_session(input: SessionExchangeInput, response: Response):
