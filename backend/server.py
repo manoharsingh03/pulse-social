@@ -234,7 +234,7 @@ async def match_to_circle(pulse: MoodPulse, user_id: str):
     active_circles = await db.circles.find({
         "emotion": pulse.emotion,
         "expires_at": {"$gt": datetime.now(timezone.utc).isoformat()},
-        "members": {"$size": {"$lt": 10}}  # Max 10 members
+        "$expr": {"$lt": [{"$size": "$members"}, 10]}  # Max 10 members
     }).to_list(100)
     
     if active_circles:
